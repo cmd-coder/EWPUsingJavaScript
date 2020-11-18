@@ -21,14 +21,16 @@ function getWorkingHours(empCheck)
     }
 }
 
-
-
+let dailyWage=new Array();
 let empHrs=0;
 for(let day=0;day<NUM_OF_WORKING_DAYS;day++)
 {
     let empCheck = Math.floor(Math.random()*10)%3;
-    empHrs+=getWorkingHours(empCheck);
-    if(empHrs>=160)
+    let dailyHrs=getWorkingHours(empCheck);
+    dailyWage.push(dailyHrs*WAGE_PER_HOUR);
+    empHrs+=dailyHrs;
+    console.log(dailyWage[dailyWage.length-1])
+    if(empHrs>=MAX_HRS_IN_MONTH)
         break;
 }
 let empWage=empHrs*WAGE_PER_HOUR;
