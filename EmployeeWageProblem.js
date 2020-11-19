@@ -137,7 +137,7 @@ console.log("UC9A - Emp Wage with Arrow: "+" Total  Hours: "+totalHours+" Total 
 let nonWorkingDays=new Array();
 let partWorkingDays=new Array();
 let fullWorkingDays=new Array();
-empDailyWageMap.forEach((value,key,map) => {
+empDailyHrsMap.forEach((value,key,map) => {
   if(value==8) fullWorkingDays.push(key);
   else if(value==4) partWorkingDays.push(key);
   else nonWorkingDays.push(key);
@@ -162,8 +162,22 @@ while(totalEmpHrs2<=MAX_HRS_IN_MONTH && totalWorkingDays2<NUM_OF_WORKING_DAYS)
     dailyHours:empHrs,
     dailyWage:calcDailyWage(empHrs),
     toString(){
-      return '\nDay'+this.dayNum+' => Working Houors is '+this.dailyHours+' And Wage Earned= '+this.dailyWage
+      return '\nDay'+this.dayNum+' => Working Hours is '+this.dailyHours+' And Wage Earned= '+this.dailyWage
     },
     });
 }
 console.log("UC 10 Showing Daily Hours Worked and Wage Earned: "+empDailyHrsAndWageArr);
+
+//UC11 Perform Object Operations Using Arrow Functions
+let totalWages2=empDailyHrsAndWageArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyWage>0).reduce((totalWage, dailyHrsAndWage)=>totalWage+=dailyHrsAndWage.dailyWage,0);
+let totalHours2=empDailyHrsAndWageArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyWage>0).reduce((totalHours, dailyHrsAndWage)=>totalHours+=dailyHrsAndWage.dailyHours,0);
+console.log("UC 11A Total Hours: "+totalHours2+" Total Wages: "+totalWages2);
+
+console.log("UC 11B Logging Full Work Days");
+empDailyHrsAndWageArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyHours==8).forEach(dailyHrsAndWage=>console.log(dailyHrsAndWage.toString()));
+
+let partWorkingDaysStrArr=empDailyHrsAndWageArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyHours==4).map(dailyHrsAndWage=>dailyHrsAndWage.toString());
+console.log("UC 11C PartWorkingDayStrings: "+partWorkingDaysStrArr);
+
+let nonWorkingDayNums=empDailyHrsAndWageArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyHours==0).map(dailyHrsAndWage=>dailyHrsAndWage.dayNum);
+console.log("UC 11D NonWorkingDayNums: "+nonWorkingDayNums);
