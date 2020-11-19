@@ -145,3 +145,25 @@ empDailyWageMap.forEach((value,key,map) => {
 console.log("Full Working Days: "+fullWorkingDays);
 console.log("Part Working Days: "+partWorkingDays);
 console.log("Non Working Days: "+nonWorkingDays);
+
+//UC10 Ability to store the Day, Hours Worked and Wage Earned in a single object
+let totalEmpHrs2=0;
+let totalWorkingDays2=0;
+let empDailyHrsAndWageArr=new Array();
+while(totalEmpHrs2<=MAX_HRS_IN_MONTH && totalWorkingDays2<NUM_OF_WORKING_DAYS)
+{
+  totalWorkingDays2++;
+  let empCheck=Math.floor(Math.random()*10)%3;
+  let empHrs=getWorkingHours(empCheck);
+  totalEmpHrs2+=empHrs;
+  empDailyHrsAndWageArr.push(
+    {
+    dayNum:totalWorkingDays2,
+    dailyHours:empHrs,
+    dailyWage:calcDailyWage(empHrs),
+    toString(){
+      return '\nDay'+this.dayNum+' => Working Houors is '+this.dailyHours+' And Wage Earned= '+this.dailyWage
+    },
+    });
+}
+console.log("UC 10 Showing Daily Hours Worked and Wage Earned: "+empDailyHrsAndWageArr);
